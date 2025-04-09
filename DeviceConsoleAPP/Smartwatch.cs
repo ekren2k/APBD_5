@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace DeviceConsoleAPP;
 
 public class Smartwatch : Device, IBatteryMonitor
@@ -22,6 +24,7 @@ public class Smartwatch : Device, IBatteryMonitor
         }
     }
     
+    [JsonConstructor]
     public Smartwatch(string id, string name, bool isEnabled, int batteryLevel) : base(id, name, isEnabled)
     {
         if (CheckId(id))

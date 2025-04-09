@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace DeviceConsoleAPP;
@@ -23,6 +24,7 @@ public class Embedded : Device, INetworkDevice
         }
     }
     
+    [JsonConstructor]
     public Embedded(string id, string name, bool isEnabled, string ipAddress, string networkName) : base(id, name, isEnabled)
     {
         if (CheckId(id))
