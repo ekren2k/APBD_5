@@ -1,3 +1,5 @@
+
+
 namespace DeviceConsoleAPP;
 
 public class PersonalComputer : Device

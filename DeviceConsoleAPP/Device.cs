@@ -1,4 +1,10 @@
+using System.Text.Json.Serialization;
+
 namespace DeviceConsoleAPP;
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+[JsonDerivedType(typeof(PersonalComputer), "personal_computer")]
+[JsonDerivedType(typeof(Smartwatch), "smartwatch")]
+[JsonDerivedType(typeof(Embedded), "embedded_device")]
 
 public abstract class Device
 {

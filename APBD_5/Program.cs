@@ -1,3 +1,6 @@
+using System.Text.Json.Serialization.Metadata;
+using DeviceConsoleAPP;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
