@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 [Route("[controller]")]
 public class DeviceController : ControllerBase
 {
+    // I use this just to initialize the list with some data, don't bully me for violating SOLID principles please 😭
     private static DeviceRepository _deviceRepo = new DeviceRepository();
-    
     private DeviceFileParser _deviceFileParser = new DeviceFileParser("input.txt", _deviceRepo);
     private static List<Device> _devices = _deviceRepo.GetDevices();
 
@@ -28,6 +28,9 @@ public class DeviceController : ControllerBase
     }
 
     [HttpPost]
+    
+    // don't forget to put "$type": (f.e.) "smartwatch" in your json body request so that it knows what is the type of your device
+    // P.S. I forgot to put it there and spent about 2 hours solving a non-existent issue 💀
     public IActionResult Post([FromBody] Device device)
     {
         try
