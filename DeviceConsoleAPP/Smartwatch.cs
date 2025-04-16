@@ -24,7 +24,7 @@ public class Smartwatch : Device, IBatteryMonitor
         }
     }
     
-    [JsonConstructor]
+    /*[JsonConstructor]*/
     public Smartwatch(string id, string name, bool isEnabled, int batteryLevel) : base(id, name, isEnabled)
     {
         if (CheckId(id))

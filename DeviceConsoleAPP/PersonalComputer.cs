@@ -9,7 +9,7 @@ public class PersonalComputer : Device
     public string? OperatingSystem { get; set; }
     
    
-    [JsonConstructor]
+    /*[JsonConstructor]*/
     public PersonalComputer(string id, string name, bool isEnabled, string? operatingSystem) : base(id, name, isEnabled)
     {
         if (!CheckId(id))

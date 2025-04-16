@@ -3,10 +3,10 @@
 using System.Text.Json.Serialization;
 
 namespace DeviceConsoleAPP;
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
+/*[JsonPolymorphic(TypeDiscriminatorPropertyName = "$type")]
 [JsonDerivedType(typeof(PersonalComputer), "personal_computer")]
 [JsonDerivedType(typeof(Smartwatch), "smartwatch")]
-[JsonDerivedType(typeof(Embedded), "embedded_device")]
+[JsonDerivedType(typeof(Embedded), "embedded_device")]*/
 
 public abstract class Device
 {
@@ -15,7 +15,7 @@ public abstract class Device
     public bool IsEnabled { get; set; }
     
 
-    [JsonConstructor]
+    /*[JsonConstructor]*/
     public Device(string id, string name, bool isEnabled)
     {
         Id = id;

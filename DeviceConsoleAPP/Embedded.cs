@@ -24,7 +24,7 @@ public class Embedded : Device, INetworkDevice
         }
     }
     
-    [JsonConstructor]
+    /*[JsonConstructor]*/
     public Embedded(string id, string name, bool isEnabled, string ipAddress, string networkName) : base(id, name, isEnabled)
     {
         if (CheckId(id))
