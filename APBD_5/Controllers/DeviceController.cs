@@ -5,7 +5,8 @@ namespace APBD_5.Controllers;
 
 using Microsoft.AspNetCore.Mvc;
 
-[Route("[controller]")]
+[ApiController]
+[Route("/api/devices")]
 public class DeviceController : ControllerBase
 {
     // I use this just to initialize the list with some data, don't bully me for violating SOLID principles please 😭
@@ -25,34 +26,34 @@ public class DeviceController : ControllerBase
     public Device? GetDeviceById(string id)
     {
         return _deviceRepo.GetDeviceById(id);
+
     }
 
-    /*[HttpPost]*/
-    
-    // don't forget to put "$type": (f.e.) "smartwatch" in your json body request so that it knows what is the type of your device
-    // P.S. I forgot to put it there and spent about 2 hours solving a non-existent issue 💀
-    /*
-    public IActionResult Post([FromBody] Device device)
+    [HttpGet("pc/{id}")]
+    public ActionResult<PersonalComputer> GetPC(string id)
     {
-        try
-        {
-            _deviceRepo.AddDevice(device);
-            return CreatedAtAction(nameof(GetDevices), new { id = device.Id }, device);
-        }
-        catch (ArgumentException e)
-        {
-            return BadRequest(e.Message);
-        }
-
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Something went wrong: {ex.Message}");
-        }
+        var pc = _deviceRepo.GetPersonalComputerById(id);
+        return pc is null ? NotFound($"No PersonalComputer with ID {id}") : Ok(pc);
     }
-    */
 
-    [HttpPost(Name = "AddPC")]
-    public IActionResult Post([FromBody] PersonalComputer pc)
+    [HttpGet("smartwatch/{id}")]
+    public ActionResult<Smartwatch> GetSmartwatch(string id)
+    {
+        var sw = _deviceRepo.GetSmartwatchById(id);
+        return sw is null ? NotFound($"No Smartwatch with ID {id}") : Ok(sw);
+    }
+
+    [HttpGet("embedded/{id}")]
+    public ActionResult<Embedded> GetEmbedded(string id)
+    {
+        var ed = _deviceRepo.GetEmbeddedById(id);
+        return ed is null ? NotFound($"No Embedded with ID {id}") : Ok(ed);
+    }
+    
+    
+
+    [HttpPost("pc")]
+    public IActionResult PostPC([FromBody] PersonalComputer pc)
     {
         try
         {
@@ -65,8 +66,8 @@ public class DeviceController : ControllerBase
         }
     }
 
-    [HttpPost(Name = "AddSmartwatch")]
-    public IActionResult Post([FromBody] Smartwatch sw)
+    [HttpPost("smartwatch")]
+    public IActionResult PostSmartwatch([FromBody] Smartwatch sw)
     {
         try
         {
@@ -79,9 +80,9 @@ public class DeviceController : ControllerBase
         }
     }
     
-    [HttpPost(Name = "AddEmbeddedDevice")]
+    [HttpPost("embedded")]
     
-    public IActionResult Post([FromBody] Embedded ed)
+    public IActionResult PostEmbedded([FromBody] Embedded ed)
     {
         try
         {
@@ -112,27 +113,9 @@ public class DeviceController : ControllerBase
         }
     }
 
-    /*[HttpPut]
-    public IActionResult Put([FromBody] Device updatedDevice)
-    {
-        try
-        {
-            _deviceRepo.EditDevice(updatedDevice);
-            return Ok(updatedDevice);
-        }
-        catch (ArgumentException e)
-        {
-            return BadRequest(e.Message);
-        }
 
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Something went wrong: {ex.Message}");
-        }
-    }*/
-
-    [HttpPut(Name = "UpdatePC")]
-    public IActionResult Put([FromBody] PersonalComputer updatedPC)
+    [HttpPut("pc")]
+    public IActionResult PutPC([FromBody] PersonalComputer updatedPC)
     {
         try
         {
@@ -150,8 +133,8 @@ public class DeviceController : ControllerBase
         }
     }
     
-    [HttpPut(Name = "UpdateSmartwatch")]
-    public IActionResult Put([FromBody] Smartwatch updatedSmartwatch)
+    [HttpPut("smartwatch")]
+    public IActionResult PutSmartwatch([FromBody] Smartwatch updatedSmartwatch)
     {
         try
         {
@@ -169,9 +152,9 @@ public class DeviceController : ControllerBase
         }
     }
     
-    [HttpPut(Name = "UpdateEmbeddedDevice")]
+    [HttpPut("embedded")]
     
-    public IActionResult Put([FromBody] Embedded updatedEmbedded)
+    public IActionResult PutEmbedded([FromBody] Embedded updatedEmbedded)
     {
         try
         {

@@ -97,4 +97,21 @@ public class DeviceRepository
 
         return null;
     }
+    public PersonalComputer? GetPersonalComputerById(string id)
+    {
+        var device = GetDeviceById(id);
+        return device as PersonalComputer;
+    }
+
+    public Smartwatch? GetSmartwatchById(string id)
+    {
+        var device = GetDeviceById(id);
+        return device as Smartwatch;
+    }
+
+    public Embedded? GetEmbeddedById(string id)
+    {
+        var device = GetDeviceById(id);
+        return device as Embedded;
+    }
 }
